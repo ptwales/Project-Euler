@@ -35,7 +35,7 @@ T lcmm(const std::vector<T> &a) {
 
 template<class T>
 std::vector<T> range(const T &a, const T &b) {
-	std::vector<T> v(b - a + 1);
+    std::vector<T> v(b - a + 1);
 	std::iota(v.begin(), v.end(), a);
 	return v;
 }
