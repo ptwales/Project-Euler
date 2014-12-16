@@ -32,7 +32,7 @@ def genSubStr(length, number_string):
 def chars_to_int(num_string):
     return [int(digit) for digit in num_string]
 
-def problem_7(str):
+def problem_8(str):
     gen_chars = genSubStr(13, str)
     get_ints = (chars_to_int(s) for s in gen_chars)
     return max([product(i) for i in get_ints])
