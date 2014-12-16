@@ -1,4 +1,4 @@
-args = (xrange(1,21))
+args = (1, 21)
 
 def gcd(a, b):
     while b:      
@@ -11,5 +11,5 @@ def lcm(a, b):
 def lcmm(*a):
     return reduce(lcm, a)
 
-def problem_5(rng):
-    return lcmm(*rng)
+def problem_5(lower, upper):
+    return lcmm(*xrange(lower, upper))
