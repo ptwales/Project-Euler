@@ -1,4 +1,4 @@
-args = (4 * 10**6)
+args = (4 * 10**6, )
 
 def problem_2(limit):
 
