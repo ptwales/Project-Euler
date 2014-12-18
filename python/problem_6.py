@@ -1,9 +1,10 @@
 args = (1, 100)
 
 """
->>> gauss_sum(1, 10)
+>>>> gauss_sum(1, 10)
 55
->>> gauss_sum(5, 10)
+
+>>>> gauss_sum(5, 10)
 40
 """
 def gauss_sum(lo, hi):
@@ -14,7 +15,7 @@ def gauss_sum(lo, hi):
     return from_one(hi) - from_one(lo - 1)
 
 """
->>> gauss_sqrsum(1, 10)
+>>>> gauss_sqrsum(1, 10)
 385
 """
 def gauss_sqrsum(lo, hi):
@@ -25,7 +26,7 @@ def gauss_sqrsum(lo, hi):
     return from_one(hi) - from_one(lo - 1)
     
 """
->>> problem_6(1, 10)
+>>>> problem_6(1, 10)
 2640
 """
 def problem_6(lo, hi):
