@@ -1,8 +1,8 @@
 import itertools
 import math
 
-
-def fermats_little(n):
+# TODO
+def Fermats_little(n):
     """
     >>> fermats_little(2)
     True
@@ -16,7 +16,6 @@ def fermats_little(n):
         if (a**n) % n != a % n:
             return False
     return True
-
 
 
 def naiive_is_prime(n):
@@ -37,10 +36,17 @@ def naiive_is_prime(n):
     return (smallest_divisor(n) == n)
 
 
+"""
+"""
+def infinite_primes(is_prime):
+    for n in itertools.count(2):
+        if is_prime(n):
+            yield n
+
+
 # Sieve of Eratosthenes
 # Code by David Eppstein, UC Irvine, 28 Feb 2002
 # http://code.activestate.com/recipes/117119/
-
 def Eppstein_Sieve():
     """ Generate an infinite sequence of prime numbers.
     """
@@ -48,37 +54,40 @@ def Eppstein_Sieve():
     # This is memory efficient, as the sieve is not "run forward"
     # indefinitely, but only as long as required by the current
     # number being tested.
-    composites_to_primes = {}  
+    
+    # (composite number) => [prime factors]
+    composite_to_primes = {}  
 
-    # The running integer that's checked for primeness
-    n = 2  
-
-    while True:
-        if n not in composites_to_primes:
-            # n is a new prime.
-            # Yield it and mark its first multiple that isn't
-            # already marked in previous iterations
-            yield n        
-            composites_to_primes[n * n] = [n]
-        else:
-            # n is composite. composites_to_primes[n] is the list of primes that
-            # divide it. Since we've reached n, we no longer
-            # need it in the map, but we'll mark the next 
-            # multiples of its witnesses to prepare for larger
-            # numbers
-            for p in composites_to_primes[n]:
-                composites_to_primes.setdefault(p + n, []).append(p)
-            del composites_to_primes[n]
-        
-        n += 1
-
-"""
-"""
-def infinite_primes(is_prime):
     for n in itertools.count(2):
-        if is_prime(n):
-            yield n
- 
+        if n not in composite_to_primes:
+            # n is not composite -> it is prime
+            yield n 
+            # n * n is composite and it's only prime factors are [n]
+            composite_to_primes[n * n] = [n]
+        else:
+            # composite + prime -> composite?
+            for prime in composite_to_primes[n]:
+                composite_to_primes.setdefault(prime + n, []).append(prime)
+            del composite_to_primes[n]
+
+
+def Eratosthenes(n):
+    
+    domain = range(2, n)
+    limit = int(n ** 0.5) + 1
+    work = domain[:limit]
+    rest = domain[limit:]
+    composites = set()
+    
+    for i in work:
+        if i not in composites:
+            yield i
+            composites.update(range(i + i, n + 1, i))
+            # TODO: remove everything under i from composites
+    
+    for i in set(rest).difference(composites):
+        yield i
+    
 
 def index_generator(gen, i):
     """
