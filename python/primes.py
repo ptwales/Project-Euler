@@ -48,32 +48,29 @@ def Eppstein_Sieve():
     # This is memory efficient, as the sieve is not "run forward"
     # indefinitely, but only as long as required by the current
     # number being tested.
-    #
-    D = {}  
+    composites_to_primes = {}  
 
     # The running integer that's checked for primeness
-    q = 2  
+    n = 2  
 
     while True:
-        if q not in D:
-            # q is a new prime.
+        if n not in composites_to_primes:
+            # n is a new prime.
             # Yield it and mark its first multiple that isn't
             # already marked in previous iterations
-            # 
-            yield q        
-            D[q * q] = [q]
+            yield n        
+            composites_to_primes[n * n] = [n]
         else:
-            # q is composite. D[q] is the list of primes that
-            # divide it. Since we've reached q, we no longer
+            # n is composite. composites_to_primes[n] is the list of primes that
+            # divide it. Since we've reached n, we no longer
             # need it in the map, but we'll mark the next 
             # multiples of its witnesses to prepare for larger
             # numbers
-            # 
-            for p in D[q]:
-                D.setdefault(p + q, []).append(p)
-            del D[q]
-
-        q += 1
+            for p in composites_to_primes[n]:
+                composites_to_primes.setdefault(p + n, []).append(p)
+            del composites_to_primes[n]
+        
+        n += 1
 
 """
 """
