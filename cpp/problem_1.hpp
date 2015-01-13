@@ -6,6 +6,13 @@
  * Answer 233168
  */
 
+namespace problem_1 {
+
+const unsigned int TEST_Q = 10;
+const unsigned int TEST_A = 23;
+const unsigned long Q = 1000;
+const unsigned long A = 233168L;
+
 
 template <class T>
 T problem_1(T limit) {
@@ -16,4 +23,6 @@ T problem_1(T limit) {
         }
     }
     return sum;
+}
+
 }

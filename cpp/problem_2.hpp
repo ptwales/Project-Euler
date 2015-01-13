@@ -12,22 +12,24 @@
  
 // TODO: this is C make it C++s
 
-template<class T>
-T problem_2(limit) {
-    T sum = 0
-    T i = 1
-    T i2 = 1
-    T temp;
-    for(;;){
-        temp = i;
-        i = i + i2;
-        i2 = temp;
-        if(i >= limit) {
-            break;
+namespace problem_2 {
+    template<class T>
+    T problem_2(T limit) {
+        T sum = 0;
+        T i = 1;
+        T i2 = 1;
+        T temp;
+        for(;;){
+            temp = i;
+            i = i + i2;
+            i2 = temp;
+            if(i >= limit) {
+                break;
+            }
+            if(!(i%2)) {
+                sum += i;
+            }
         }
-        if(!(i%2)) {
-            sum += i;
-        }
+        return sum;
     }
-    return sum
 }

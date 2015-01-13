@@ -36,9 +36,9 @@ def naiive_is_prime(n):
     return (smallest_divisor(n) == n)
 
 
-"""
-"""
 def infinite_primes(is_prime):
+    """
+    """
     for n in itertools.count(2):
         if is_prime(n):
             yield n

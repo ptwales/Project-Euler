@@ -8,6 +8,7 @@
 #include <list>
 #include <algorithm>
 
+namespace problem_3 {
 
 template <class T>
 std::list<T> TrialFactorization(T n) {
@@ -34,4 +35,6 @@ T problem_3(T n) {
     return *std::max_element(my_base_factors.begin(), my_base_factors.end());
     // Assumes sorted:
     // return TrialFactorization<T>(n).back();
+}
+
 }

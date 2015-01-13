@@ -11,6 +11,8 @@
 #include<numeric>
 #include<vector>
 
+namespace problem_5 {
+
 template<class T>
 T gcd(T a, T b) {
     while(b != 0) {
@@ -41,5 +43,7 @@ std::vector<T> range(const T &lo, const T &hi) {
 
 template<class T>
 T problem_4(const T &lo, const T &hi) {
-    return lcmm(range<T>(lo, hi))
+    return lcmm(range<T>(lo, hi));
+}
+
 }

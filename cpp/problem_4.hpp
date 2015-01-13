@@ -1,4 +1,5 @@
 #include <string>
+namespace problem_4 {
 
 bool is_palindrome(const std::string &s) {
     std::string::const_iterator lo = s.begin();
@@ -21,5 +22,4 @@ T problem_4(const T &lo, const T &hi) {
     }
 }
 
-//    std::cout << problem_4(100, 999) << std::endl;
-
+}
