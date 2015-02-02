@@ -18,7 +18,7 @@ args = ("""\
 07198403850962455444362981230987879927244284909188\
 84580156166097919133875499200524063689912560717606\
 05886116467109405077541002256983155200055935729725\
-71636269561882670428252483600823257530420752963450""", )
+71636269561882670428252483600823257530420752963450""", 13)
 
 import operator
 
@@ -32,7 +32,7 @@ def genSubStr(length, number_string):
 def chars_to_int(num_string):
     return [int(digit) for digit in num_string]
 
-def problem_8(str):
-    gen_chars = genSubStr(13, str)
-    get_ints = (chars_to_int(s) for s in gen_chars)
-    return max([product(i) for i in get_ints])
+def problem_8(string, length):
+    chars = genSubStr(length, string)
+    ints = [chars_to_int(s) for s in chars]
+    return max((product(i) for i in ints))
