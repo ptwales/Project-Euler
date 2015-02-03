@@ -42,7 +42,7 @@ std::vector<T> range(const T &lo, const T &hi) {
 }
 
 template<class T>
-T problem_4(const T &lo, const T &hi) {
+T problem_5(const T &lo, const T &hi) {
     return lcmm(range<T>(lo, hi));
 }
 
