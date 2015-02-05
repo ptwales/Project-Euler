@@ -71,7 +71,7 @@ def Eppstein_Sieve():
             del composite_to_primes[n]
 
 
-def Eratosthenes(n):
+def some_sieve(n):
     
     domain = range(2, n)
     limit = int(n ** 0.5) + 1
@@ -87,7 +87,19 @@ def Eratosthenes(n):
     
     for i in set(rest).difference(composites):
         yield i
+
+
+def Eratosthenes(limit):
     
+    domain = range(2, limit)
+    primes_array = [True for i in domain]
+
+    for n in domain:
+        if primes_array[n]:
+            yield n
+            for i in xrange(n, limit, n):
+                primes_array[i] = False
+ 
 
 def index_generator(gen, i):
     """
