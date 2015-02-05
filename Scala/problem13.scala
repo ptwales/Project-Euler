@@ -1,6 +1,6 @@
-import scala.math.BigInt
+import scala.math.BigInt // Cheating, write your own!
 
-val bigints: Stream[BigInt] = """37107287533902102798797998220837590246510135740250
+val bigints: List[String] = """37107287533902102798797998220837590246510135740250
 46376937677490009712648124896970078050417018260538
 74324986199524741059474233309513058123726617309629
 91942213363574161572522430563301811072406154908250
@@ -99,9 +99,14 @@ val bigints: Stream[BigInt] = """37107287533902102798797998220837590246510135740
 77158542502016545090413245809786882778948721859617
 72107838435069186155435662884062257473692284509516
 20849603980134001723930671666823555245252804609722
-53503534226472524250874054075591789781264330331690""".split("\n").toStream.map(BigInt(_))
+53503534226472524250874054075591789781264330331690""".split("\n").toList
 
-def problem13(bigInts: Stream[BigInt]): String = {
+def problem13(nums: List[String], digitCount: Int): String = {
+  
+  val sizeNeeded: Int = digitCount + scala.math.log10(nums.size).toInt
+  def shortStrs: Stream[String] = nums.toStream.map(_.take(sizeNeeded))
+  def bigInts: Stream[BigInt] = shortStrs.map(BigInt(_))
+  
   val sum: BigInt = bigInts.sum
-  sum.toString take 10
+  sum.toString take digitCount
 }
