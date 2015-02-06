@@ -1,4 +1,4 @@
-def problem1(limit: Int, factors: List[Int]) = {
+def problem1(limit: Int, factors: List[Int]): Int = {
   
   def cond(n: Int): Boolean = {
     factors.exists(x => n % x == 0})
