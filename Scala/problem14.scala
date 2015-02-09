@@ -19,16 +19,15 @@ def problem14(limit: Int): Int = {
   
   def newValues(cs: Stream[Int], sols: Map[Int, Int]): List[Int] = {
     
-    def isSolved(n: Int): Boolean = sols.contains(n)
-    lazy val lenSolved: Int = cs.indexWhere(isSolved) + 1
+    def isNewVal(n: Int): Boolean = !sols.contains(n)
     
-    cs.take(lenSolved).toList
+    cs.takeWhile(isNewVal).toList
   }
   
   def newAnswers(cs: List[Int], sols: Map[Int, Int]): Map[Int, Int] = {
     
     lazy val addLen: Int = sols(cs.last)
-    def withCounts: List[Int] = cs.reverse.zipWithIndex.tail // [4, 2, 1] => [(2, 1), (4, 2)]
+    def withCounts: List[Int] = cs.reverse.zipWithIndex.tail
     
     withCounts.map(t => (t._1, t._2 + addLen)).toMap
   }
