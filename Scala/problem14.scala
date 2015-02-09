@@ -20,7 +20,7 @@ def problem14(limit: Int): Int = {
   def newValues(cs: Stream[Int], sols: Map[Int, Int]): List[Int] = {
     
     def isNewVal(n: Int): Boolean = !sols.contains(n)
-    
+    // DOESN'T INCLUDE THE NEXT VALUE!
     cs.takeWhile(isNewVal).toList
   }
   
