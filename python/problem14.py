@@ -17,7 +17,7 @@ def collatz(n):
 def problem14(limit):
     
     def new_values(cs, sols):
-        def is_new_value(n): n not in cs
+        def is_new_value(n): n not in sols
         return [n for n in takewhile(cs, is_new_value)]
     
     def new_answers(nvs, sols):
