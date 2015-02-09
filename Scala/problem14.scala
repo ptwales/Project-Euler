@@ -3,8 +3,8 @@ def isEven(n: Int): Boolean = {
   (n % 2) == 0
 }
 
-type CollatzSeq = Stream[Int]
-def collatz(n: Int): CollatzSeq = {
+
+def collatz(n: Int): Stream[Int] = {
   
   def collatzNext(n: Int) = {
     if (isEven(n)) n/2
@@ -17,37 +17,26 @@ def collatz(n: Int): CollatzSeq = {
 
 def problem14(limit: Int): Int = {
   
-  type Answers = Map[Int, Int]
-
-  /*
-   * Calculates the length of a collatz sequence given
-   * a map of known solutions
-   */ 
-  def collatzLength(cs: CollatzSeq, sols: Answers): Int = {
+  def newValues(cs: Stream[Int], sols: Map[Int, Int]): List[Int] = {
     
     def isSolved(n: Int): Boolean = sols.contains(n)
-    lazy val solvedTilLength: Int = cs.indexWhere(isSolved) + 1
+    lazy val lenSolved: Int = cs.indexWhere(isSolved) + 1
     
-    if (solvedTilLength == 0) cs.length // sequence is already solved
-    else {
-      lazy val lastSolvedVal: Int = cs.take(solvedTilLength).last
-      solvedTilLength + sols(lastSolvedVal)
-    }
+    cs.take(lenSolved).toList
   }
   
-  def addSolution(n: Int, sols: Answers): Answers = {
-    lazy val len: Int = collatzLength(collatz(n), sols)
-    sols + (n -> len)
+  def newAnswers(cs: List[Int], sols: Map[Int, Int]): Map[Int, Int] = {
+    
+    lazy val addLen: Int = sols(cs.last)
+    def withCounts: List[Int] = cs.reverse.zipWithIndex.tail // [4, 2, 1] => [(2, 1), (4, 2)]
+    
+    withCounts.map(t => (t._1, t._2 + addLen)).toMap
   }
   
-  def buildSolution(n: Int, sols: Answers): Answers = {
-    if (n == limit) sols
-    else {
-      lazy val newSols: Answers = addSolution(n, sols)
-      buildSolution(n+1, newSols)
-    }
+  lazy val solutions = scala.collection.mutable.Map[Int, Int](1 -> 1)
+  for (n <- (2 until limit)) {
+    solutions ++= newAnswers(newValues(collatz(n), solutions), solutions)
   }
   
-  lazy val solution: Answers =  buildSolution(1, Map[Int, Int]())
   solution.maxBy(_._2)._1
 }
