@@ -3,16 +3,31 @@ def isEven(n: Int): Boolean = {
   (n % 2) == 0
 }
 
-
-def collatz(n: Int): Stream[Int] = {
+class CollatzSequence(initial: Int) {
   
-  def collatzNext(n: Int) = {
-    if (isEven(n)) n/2
+  def next(n: Int): Int = {
+    if(isEven(n)) n/2
     else 3*n + 1
   }
   
-  if (n > 1) n #:: collatz(collatzNext(n))
-  else Stream[Int]()
+  lazy val sequence: Stream[Int] = {
+    if (initial > 1) intial #:: CollatzSequence(next(initial)).sequence
+    else Stream(initial)
+  }
+  
+  lazy val newValues(knownVals: Set[Int] = Set(1)): List[CollatzSequence] = {
+    def isNew(cs: CollatzSequence): Boolean = !knownVals.contains(cs.initial)
+    sequence.takeWhile(isNew)
+  }
+  
+  lazy val newSolutions(knownLengths: Map[Int, Int] = Map(1 -> 1)) = {
+    // newValues(knownLengths.keys.toSet)
+  }
+  
+  lazy val length(knownLengths: Map[Int,Int] = Map(1 -> 1)) = {
+    
+  }
+  
 }
 
 def problem14(limit: Int): Int = {
