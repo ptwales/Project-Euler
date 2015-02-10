@@ -1,7 +1,6 @@
 import itertools
 import math
 
-# TODO
 def Fermats_little(n):
     """
     >>> fermats_little(2)
@@ -38,6 +37,9 @@ def naiive_is_prime(n):
 
 def infinite_primes(is_prime):
     """
+    Naiive impelmentation using a primality checker
+    >>> list(itertools.islice(infinite_primes(naiive_is_prime), 0, 5)
+    [2, 3, 5, 7, 11]
     """
     for n in itertools.count(2):
         if is_prime(n):
@@ -72,7 +74,10 @@ def Eppstein_Sieve():
 
 
 def Eratosthenes(n):
-    
+    """
+    >>>list(Eratosthenes(11))
+    [2, 3, 5, 7]
+    """
     limit = int(n ** 0.5) + 1 # only need to operate to limit
     work = range(2, limit) # we will run the sieve to the limit
     rest = range(limit, n) # the rest is free
@@ -82,11 +87,11 @@ def Eratosthenes(n):
         if i not in composites:
             yield i # i is a prime
             # forget all composites below i
-            past_composites = set(filter(lambda x: x < i, composites))
-            composites -= past_composites
+            past_composites = filter(lambda x: x < i, composites)
+            composites.difference_update(past_composites)
             # all multiples of i up to n are composite
-            new_composites = set(range(i + i, n + 1, i))
-            composites |= new_composites
+            new_composites = range(i + i, n + 1, i)
+            composites.update(new_composites)
 
     for i in (set(rest) - composites):
         yield i # free primes
