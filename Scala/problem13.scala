@@ -1,6 +1,6 @@
 import scala.math.BigInt // Cheating, write your own!
 
-val bigints: List[String] = scala.io.Source.fromFile("problem13.txt").mkString.split("\n")
+val bigints: List[String] = scala.io.Source.fromFile("../txt/problem13.txt").mkString.split("\n")
 
 def problem13(nums: List[String], digitCount: Int): String = {
   
