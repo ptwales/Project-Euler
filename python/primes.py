@@ -71,7 +71,7 @@ def Eppstein_Sieve():
             del composite_to_primes[n]
 
 
-def Eratosthenes(n):
+def some_sieve(n):
     
     limit = int(n ** 0.5) + 1 # only need to operate to limit
     work = range(2, limit) # we will run the sieve to the limit
@@ -80,6 +80,7 @@ def Eratosthenes(n):
     
     for i in work:
         if i not in composites:
+<<<<<<< HEAD
             yield i # i is a prime
             # forget all composites below i
             past_composites = set(filter(lambda x: x < i, composites))
@@ -90,7 +91,27 @@ def Eratosthenes(n):
 
     for i in (set(rest) - composites):
         yield i # free primes
+=======
+            yield i
+            composites.update(range(i + i, n + 1, i))
+            # TODO: remove everything under i from composites
     
+    for i in set(rest).difference(composites):
+        yield i
+
+
+def Eratosthenes(limit):
+>>>>>>> master
+    
+    domain = range(2, limit)
+    primes_array = [True for i in domain]
+
+    for n in domain:
+        if primes_array[n]:
+            yield n
+            for i in xrange(n, limit, n):
+                primes_array[i] = False
+ 
 
 def index_generator(gen, i):
     """
